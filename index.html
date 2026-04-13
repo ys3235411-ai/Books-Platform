@@ -156,6 +156,47 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
 .badge-dot{position:absolute;top:-5px;right:-5px;width:17px;height:17px;background:var(--danger);border-radius:50%;border:2px solid var(--card);font-size:.58rem;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
 .wa-nav-btn{background:#25d366 !important;border-color:#25d366 !important;color:#fff !important;}
 .wa-nav-btn:hover{background:#1da851 !important;border-color:#1da851 !important;}
+/* ── زرار تحميل الأندرويد ── */
+.apk-dl-btn{display:flex;align-items:center;gap:.42rem;padding:0 .9rem;height:38px;border-radius:11px;background:linear-gradient(135deg,#3ddc84,#00a86b);color:#fff;font-size:.78rem;font-weight:800;font-family:'Cairo',sans-serif;border:none;cursor:pointer;white-space:nowrap;box-shadow:0 3px 14px rgba(61,220,132,.4);transition:all .22s;flex-shrink:0;text-decoration:none;}
+.apk-dl-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(61,220,132,.55);color:#fff;}
+.apk-dl-btn svg{width:17px;height:17px;flex-shrink:0;}
+@keyframes apkPulse{0%,100%{box-shadow:0 3px 14px rgba(61,220,132,.4)}50%{box-shadow:0 3px 24px rgba(61,220,132,.7)}}
+.apk-dl-btn{animation:apkPulse 2.4s ease-in-out infinite;}
+.apk-dl-btn:hover{animation:none;}
+/* مخفي لو مفتوح كـ PWA */
+@media all and (display-mode:standalone){.apk-dl-btn{display:none!important;}}
+/* modal التحميل */
+.apk-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:all .28s;}
+.apk-modal-overlay.open{opacity:1;visibility:visible;}
+.apk-modal{background:var(--card);border-radius:28px;width:100%;max-width:420px;overflow:hidden;transform:scale(.92) translateY(20px);transition:transform .32s cubic-bezier(.34,1.4,.64,1);box-shadow:0 32px 80px rgba(0,0,0,.35);}
+.apk-modal-overlay.open .apk-modal{transform:scale(1) translateY(0);}
+.apk-modal-head{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);padding:2rem 1.5rem 1.8rem;text-align:center;position:relative;overflow:hidden;}
+.apk-modal-head::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(61,220,132,.12);top:-60px;left:-60px;}
+.apk-modal-head::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(61,220,132,.08);bottom:-50px;right:-40px;}
+.apk-android-icon{width:80px;height:80px;background:linear-gradient(135deg,#3ddc84,#00a86b);border-radius:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 8px 28px rgba(61,220,132,.45);position:relative;z-index:1;}
+.apk-android-icon svg{width:46px;height:46px;}
+.apk-modal-head h3{font-size:1.25rem;font-weight:900;color:#fff;margin-bottom:.3rem;position:relative;z-index:1;}
+.apk-modal-head p{font-size:.82rem;color:rgba(255,255,255,.7);position:relative;z-index:1;}
+.apk-modal-body{padding:1.4rem 1.5rem 1.5rem;}
+.apk-info-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border-radius:14px;padding:.85rem 1rem;margin-bottom:.8rem;border:1px solid var(--border);}
+.apk-info-label{font-size:.78rem;color:var(--text2);font-weight:700;}
+.apk-info-val{font-size:.82rem;color:var(--text);font-weight:900;}
+.apk-version-badge{background:linear-gradient(135deg,#3ddc84,#00a86b);color:#fff;padding:.18rem .6rem;border-radius:99px;font-size:.7rem;font-weight:800;}
+.apk-dl-main{width:100%;padding:.9rem;border-radius:16px;background:linear-gradient(135deg,#3ddc84,#00a86b);color:#fff;font-size:1rem;font-weight:900;font-family:'Cairo',sans-serif;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.55rem;margin-bottom:.6rem;box-shadow:0 6px 20px rgba(61,220,132,.4);transition:all .2s;}
+.apk-dl-main:hover{opacity:.9;transform:translateY(-1px);}
+.apk-dl-main svg{width:20px;height:20px;}
+.apk-cancel{width:100%;padding:.55rem;border-radius:12px;background:transparent;color:var(--text2);font-size:.82rem;font-weight:700;font-family:'Cairo',sans-serif;border:1.5px solid var(--border);cursor:pointer;transition:all .2s;}
+.apk-cancel:hover{border-color:var(--danger);color:var(--danger);}
+/* ── بانر التحديث ── */
+.update-banner{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(120px);z-index:99997;background:linear-gradient(135deg,#1a1a2e,#0f3460);border:1.5px solid #3ddc84;border-radius:20px;padding:.85rem 1.1rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 32px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.34,1.3,.64,1),opacity .4s;opacity:0;pointer-events:none;min-width:280px;max-width:340px;}
+.update-banner.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:all;}
+.update-banner-icon{width:38px;height:38px;background:linear-gradient(135deg,#3ddc84,#00a86b);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.update-banner-icon i{color:#fff;font-size:.95rem;}
+.update-banner-text{flex:1;}
+.update-banner-title{font-size:.82rem;font-weight:900;color:#fff;margin-bottom:.15rem;}
+.update-banner-sub{font-size:.72rem;color:rgba(255,255,255,.65);}
+.update-banner-btn{background:linear-gradient(135deg,#3ddc84,#00a86b);color:#fff;border:none;border-radius:10px;padding:.42rem .85rem;font-size:.75rem;font-weight:800;font-family:'Cairo',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.update-banner-close{width:22px;height:22px;background:rgba(255,255,255,.12);border:none;border-radius:50%;color:rgba(255,255,255,.7);font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .balance-btn{background:linear-gradient(135deg,#f59e0b,#f97316) !important;border-color:#f59e0b !important;color:#fff !important;font-size:.7rem !important;font-weight:800 !important;gap:2px !important;padding:0 .4rem !important;min-width:60px !important;width:auto !important;justify-content:center;}
 .balance-btn:hover{opacity:.9 !important;transform:translateY(-1px);}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
@@ -198,10 +239,90 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
 .btn-ghost:hover{background:var(--bg2);color:var(--text);}
 .hamb{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
 .hamb span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--card);border-bottom:1px solid var(--border);padding:1rem;z-index:999;flex-direction:column;gap:.4rem;box-shadow:var(--shadow-lg);}
-.mobile-menu.open{display:flex;}
+/* OLD mobile-menu hidden on mobile — replaced by bottom-nav */
+.mobile-menu{display:none !important;}
 .mobile-link{padding:.7rem 1rem;border-radius:10px;font-size:.9rem;font-weight:700;color:var(--text2);display:flex;align-items:center;gap:.6rem;cursor:pointer;}
 .mobile-link:hover,.mobile-link.active{background:var(--bg2);color:var(--primary);}
+
+/* =========================================================
+   ANDROID BOTTOM NAV — Telegram/Basatahalak style
+   ========================================================= */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:62px;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  z-index:1000;
+  align-items:stretch;
+  box-shadow:0 -4px 20px rgba(0,0,0,.08);
+}
+.bn-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;cursor:pointer;
+  color:var(--text3);font-size:.55rem;font-weight:700;
+  transition:color .18s;position:relative;
+  min-width:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.bn-item.active{color:var(--primary);}
+.bn-item i{font-size:1.25rem;transition:transform .18s;}
+.bn-item.active i{transform:scale(1.12);}
+.bn-item .bn-badge{
+  position:absolute;top:6px;
+  background:var(--danger);color:#fff;
+  font-size:.5rem;font-weight:800;
+  min-width:15px;height:15px;border-radius:99px;
+  display:none;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--card);
+}
+/* active indicator pill */
+.bn-item.active::after{
+  content:'';position:absolute;top:0;left:30%;right:30%;height:2.5px;
+  background:var(--gradient);border-radius:0 0 4px 4px;
+}
+
+/* Settings bottom sheet */
+.bn-settings-sheet{
+  position:fixed;bottom:62px;left:0;right:0;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  border-radius:20px 20px 0 0;
+  box-shadow:0 -8px 32px rgba(0,0,0,.15);
+  z-index:999;
+  padding:1rem;
+  transform:translateY(110%);
+  transition:transform .3s cubic-bezier(.34,1.1,.64,1);
+}
+.bn-settings-sheet.open{transform:translateY(0);}
+.bn-sheet-handle{width:36px;height:4px;background:var(--border);border-radius:99px;margin:0 auto .85rem;}
+.bn-sheet-title{font-size:.8rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem;padding:0 .25rem;}
+.bn-sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.bn-sheet-item{
+  display:flex;align-items:center;gap:.65rem;
+  padding:.75rem .85rem;border-radius:13px;
+  background:var(--bg2);border:1.5px solid var(--border);
+  cursor:pointer;color:var(--text2);
+  font-size:.82rem;font-weight:700;
+  transition:all .18s;
+  -webkit-tap-highlight-color:transparent;
+}
+.bn-sheet-item:active{background:var(--border);transform:scale(.97);}
+.bn-sheet-item i{width:30px;height:30px;border-radius:9px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--primary);flex-shrink:0;}
+.bn-sheet-divider{height:1px;background:var(--border);margin:.6rem 0;grid-column:1/-1;}
+.bn-sheet-item.danger{color:var(--danger);}
+.bn-sheet-item.danger i{color:var(--danger);}
+.bn-sheet-overlay{display:none;position:fixed;inset:0;z-index:998;}
+.bn-sheet-overlay.open{display:block;}
+@media(max-width:768px){
+  .bottom-nav{display:flex;}
+  body{padding-bottom:62px;}
+  .chat-fab{bottom:74px;}
+  .wa-fab{bottom:74px;}
+  .help-fab{bottom:74px;}
+  .live-notif{bottom:78px;}
+  .toast-wrap{bottom:74px;top:auto;}
+}
 
 /* =========================================================
    THEME PANEL — REDESIGNED
@@ -629,8 +750,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
 .tstep{display:flex;align-items:flex-start;gap:.9rem;}
 .tdot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
 .tdot.done{background:var(--gradient);color:#fff;}
-.tdot.active{background:rgba(37,99,235,.15);color:var(--primary);border:2px solid var(--primary);}
+.tdot.active{background:rgba(37,99,235,.15);color:var(--primary);border:2px solid var(--primary);animation:tdotPulse 1.6s ease-in-out infinite;}
 .tdot.idle{background:var(--bg2);color:var(--text3);border:2px solid var(--border);}
+@keyframes tdotPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.35)}50%{box-shadow:0 0 0 8px rgba(37,99,235,0)}}
 .tinfo h4{font-size:.88rem;font-weight:800;color:var(--text);}
 .tinfo p{font-size:.76rem;color:var(--text3);}
 
@@ -1324,6 +1446,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
         <div id="notifList"><div class="notif-empty"><i class="fas fa-bell-slash"></i><p>لا توجد إشعارات</p></div></div>
       </div>
     </div>
+    <!-- تحميل تطبيق الأندرويد -->
+    <button class="apk-dl-btn" id="apkDlBtn" onclick="openApkModal()" title="حمّل تطبيق الأندرويد">
+      <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.523 15.341a.75.75 0 0 1-.75.75H7.227a.75.75 0 0 1 0-1.5h9.546a.75.75 0 0 1 .75.75ZM6.48 8.119l1.557 2.697a5.266 5.266 0 0 0-.783 2.746.75.75 0 0 0 1.5 0 3.763 3.763 0 0 1 3.76-3.76 3.763 3.763 0 0 1 3.76 3.76.75.75 0 0 0 1.5 0 5.266 5.266 0 0 0-.783-2.746l1.557-2.697a.75.75 0 0 0-1.3-.75l-1.476 2.557a5.244 5.244 0 0 0-3.258-.998 5.244 5.244 0 0 0-3.258.998L7.78 7.369a.75.75 0 0 0-1.3.75Zm6.034-1.244a.563.563 0 1 0 0-1.125.563.563 0 0 0 0 1.125Zm-2.25 0a.563.563 0 1 0 0-1.125.563.563 0 0 0 0 1.125Z"/>
+      </svg>
+      أندرويد
+    </button>
     <!-- WhatsApp -->
     <a href="https://wa.me/201140137374" target="_blank" class="icon-btn wa-nav-btn" title="واتساب">
       <i class="fab fa-whatsapp" style="font-size:1.15rem"></i>
@@ -1397,19 +1526,78 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a class="mobile-link active" onclick="showPage('home');toggleMobile()"><i class="fas fa-home"></i>الرئيسية</a>
-  <a class="mobile-link" onclick="showPage('books');toggleMobile()"><i class="fas fa-book"></i>الكتب</a>
-  <a class="mobile-link" onclick="openPackagesPage();toggleMobile()" style="color:var(--warning)"><i class="fas fa-fire"></i>باكجات مميزة 🔥</a>
-  <a class="mobile-link" onclick="showPage('library');toggleMobile()"><i class="fas fa-bookmark"></i>مكتبتي</a>
-  <a class="mobile-link" onclick="showPage('quiz');toggleMobile()"><i class="fas fa-circle-question"></i>اختبارات</a>
-  <a class="mobile-link" onclick="showPage('schedule');toggleMobile()"><i class="fas fa-calendar-days"></i>جدول مذاكرة</a>
-  <a class="mobile-link" onclick="showPage('aigen');toggleMobile()"><i class="fas fa-robot"></i>AI كتب</a>
-  <a class="mobile-link" onclick="showPage('tracking');toggleMobile()"><i class="fas fa-location-dot"></i>تتبع الطلب</a>
-  <a class="mobile-link" onclick="showPage('orders');toggleMobile()"><i class="fas fa-box"></i>طلباتي</a>
-  <a class="mobile-link" onclick="showPage('contact');toggleMobile()"><i class="fas fa-headset"></i>تواصل معنا</a>
-  <a class="mobile-link" href="https://wa.me/201140137374" target="_blank" style="color:#25d366"><i class="fab fa-whatsapp"></i>واتساب</a>
-  <a class="mobile-link admin-nav-link" onclick="showPage('admin');toggleMobile()" style="display:none"><i class="fas fa-gauge"></i>لوحة التحكم</a>
+<div class="mobile-menu" id="mobileMenu"></div>
+
+<!-- ======= ANDROID BOTTOM NAV ======= -->
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bn-item active" id="bnHome" onclick="showPage('home');updateBN('home')">
+    <i class="fas fa-home"></i>
+    <span>الرئيسية</span>
+  </div>
+  <div class="bn-item" id="bnBooks" onclick="showPage('books');updateBN('books')">
+    <i class="fas fa-book"></i>
+    <span>الكتب</span>
+    <span class="bn-badge" id="bnCartBadge">0</span>
+  </div>
+  <div class="bn-item" id="bnLibrary" onclick="showPage('library');updateBN('library')">
+    <i class="fas fa-bookmark"></i>
+    <span>مكتبتي</span>
+  </div>
+  <div class="bn-item" id="bnOrders" onclick="showPage('orders');updateBN('orders')">
+    <i class="fas fa-box"></i>
+    <span>طلباتي</span>
+  </div>
+  <div class="bn-item" id="bnMore" onclick="toggleBNSheet()">
+    <i class="fas fa-gear"></i>
+    <span>المزيد</span>
+  </div>
+</nav>
+
+<!-- Settings / More bottom sheet -->
+<div class="bn-sheet-overlay" id="bnSheetOverlay" onclick="closeBNSheet()"></div>
+<div class="bn-settings-sheet" id="bnSheet">
+  <div class="bn-sheet-handle"></div>
+  <div class="bn-sheet-title">قائمة التنقل</div>
+  <div class="bn-sheet-grid">
+    <div class="bn-sheet-item" onclick="showPage('quiz');closeBNSheet()">
+      <i class="fas fa-circle-question"></i>اختبارات
+    </div>
+    <div class="bn-sheet-item" onclick="showPage('schedule');closeBNSheet()">
+      <i class="fas fa-calendar-days"></i>جدول المذاكرة
+    </div>
+    <div class="bn-sheet-item" onclick="showPage('aigen');closeBNSheet()">
+      <i class="fas fa-robot"></i>AI كتب
+    </div>
+    <div class="bn-sheet-item" onclick="showPage('tracking');closeBNSheet()">
+      <i class="fas fa-location-dot"></i>تتبع الطلب
+    </div>
+    <div class="bn-sheet-item" onclick="openPackagesPage();closeBNSheet()" style="color:var(--warning)">
+      <i class="fas fa-fire" style="color:var(--warning)"></i>باكجات مميزة 🔥
+    </div>
+    <div class="bn-sheet-item" onclick="showPage('contact');closeBNSheet()">
+      <i class="fas fa-headset"></i>تواصل معنا
+    </div>
+    <div class="bn-sheet-item" onclick="window.open('https://wa.me/201140137374','_blank');closeBNSheet()" style="color:#25d366">
+      <i class="fab fa-whatsapp" style="color:#25d366"></i>واتساب
+    </div>
+    <div class="bn-sheet-item admin-nav-link" onclick="showPage('admin');closeBNSheet()" style="display:none">
+      <i class="fas fa-gauge"></i>لوحة التحكم
+    </div>
+    <div class="bn-sheet-divider"></div>
+    <!-- theme & dark mode -->
+    <div class="bn-sheet-item" onclick="toggleDark();closeBNSheet()">
+      <i class="fas fa-moon"></i>الوضع الداكن
+    </div>
+    <div class="bn-sheet-item" id="bnLoginBtn" onclick="openModal('authModal');closeBNSheet()" style="">
+      <i class="fas fa-right-to-bracket"></i>تسجيل الدخول
+    </div>
+    <div class="bn-sheet-item" id="bnProfileBtn" onclick="showPage('profile');closeBNSheet()" style="display:none">
+      <i class="fas fa-user"></i>ملفي الشخصي
+    </div>
+    <div class="bn-sheet-item danger" id="bnLogoutBtn" onclick="logout();closeBNSheet()" style="display:none">
+      <i class="fas fa-right-from-bracket"></i>تسجيل الخروج
+    </div>
+  </div>
 </div>
 
 <!-- ==================== PAGES ==================== -->
@@ -2183,7 +2371,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
         <!-- Payment method chooser -->
         <div style="margin-bottom:1rem">
           <label class="form-label"><i class="fas fa-credit-card" style="color:var(--primary);margin-left:.3rem"></i>طريقة الدفع</label>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.4rem" id="payMethodGrid">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.55rem;margin-top:.4rem" id="payMethodGrid">
             <div class="pay-method-opt active" id="pm-code" onclick="selectPayMethod('code')" style="border:2px solid var(--primary);border-radius:12px;padding:.65rem .75rem;cursor:pointer;background:rgba(37,99,235,.07);display:flex;align-items:center;gap:.5rem">
               <span style="font-size:1.1rem">🔑</span>
               <div>
@@ -2196,6 +2384,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
               <div>
                 <div style="font-size:.78rem;font-weight:800;color:var(--text)">الرصيد</div>
                 <div style="font-size:.68rem;color:var(--text3)" id="pm-balance-amt">رصيدك: 0 ج</div>
+              </div>
+            </div>
+            <div class="pay-method-opt" id="pm-card" onclick="selectPayMethod('card')" style="border:2px solid var(--border);border-radius:12px;padding:.65rem .75rem;cursor:pointer;background:var(--bg2);display:flex;align-items:center;gap:.5rem">
+              <span style="font-size:1.1rem">💳</span>
+              <div>
+                <div style="font-size:.78rem;font-weight:800;color:var(--text)">بطاقة بنكية</div>
+                <div style="font-size:.68rem;color:var(--text3)">Visa / MC</div>
               </div>
             </div>
           </div>
@@ -2214,6 +2409,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
           <button class="btn btn-primary w-full mt-2" onclick="payWithBalance()" style="padding:.75rem;font-size:.95rem;border-radius:12px;justify-content:center;background:linear-gradient(135deg,#f59e0b,#f97316)">
             <i class="fas fa-coins"></i>ادفع من رصيدك
           </button>
+        </div>
+        <!-- Card section (shown when card selected) -->
+        <div id="payByCardSection" style="display:none">
+          <div style="background:linear-gradient(135deg,rgba(37,99,235,.06),rgba(124,58,237,.06));border:1.5px solid rgba(37,99,235,.2);border-radius:12px;padding:.75rem .85rem;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem">
+            <i class="fas fa-shield-halved" style="color:var(--primary);font-size:1.1rem;flex-shrink:0"></i>
+            <div>
+              <div style="font-size:.78rem;font-weight:800;color:var(--text)">دفع آمن عبر Paymob</div>
+              <div style="font-size:.7rem;color:var(--text2)">Visa · Mastercard · Meeza · مدفوعات لحظية</div>
+            </div>
+          </div>
+          <button class="btn btn-primary w-full mt-2" onclick="payWithCard()" id="cardPayBtn" style="padding:.75rem;font-size:.95rem;border-radius:12px;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed)">
+            <i class="fas fa-credit-card"></i>ادفع بالبطاقة الآن
+          </button>
+        </div>
+        <!-- Paymob iframe modal -->
+        <div id="paymobOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:99999;align-items:center;justify-content:center;padding:1rem">
+          <div style="background:#fff;border-radius:20px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;max-height:90vh;display:flex;flex-direction:column">
+            <div style="background:linear-gradient(135deg,#2563eb,#7c3aed);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+              <div style="display:flex;align-items:center;gap:.6rem">
+                <i class="fas fa-lock" style="color:#fff;font-size:.95rem"></i>
+                <span style="color:#fff;font-weight:800;font-size:.95rem;font-family:'Cairo',sans-serif">دفع آمن — Paymob</span>
+              </div>
+              <button onclick="closePaymobModal()" style="background:rgba(255,255,255,.2);border:none;border-radius:8px;width:32px;height:32px;color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div id="paymobIframeWrap" style="flex:1;min-height:480px;display:flex;align-items:center;justify-content:center">
+              <div id="paymobLoadingSpinner" style="text-align:center;padding:2rem">
+                <div style="width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem"></div>
+                <p style="font-family:'Cairo',sans-serif;color:#475569;font-size:.88rem;font-weight:600">جارٍ تحميل صفحة الدفع...</p>
+              </div>
+              <iframe id="paymobIframe" style="width:100%;height:480px;border:none;display:none" allow="payment" allowfullscreen></iframe>
+            </div>
+          </div>
         </div>
         <p style="font-size:.72rem;color:var(--text3);text-align:center;margin-top:.75rem"><i class="fas fa-shield-halved"></i> عملية آمنة ومشفرة بالكامل</p>
       </div>
@@ -3324,11 +3551,11 @@ function onGovChange() {
   const delivery = DELIVERY_PRICES[gov] || 30;
   document.getElementById('summaryDelivery').textContent = delivery + ' جنيه';
   document.getElementById('summaryTotal').textContent = (book.price + delivery) + ' جنيه';
-  // Show delivery days if set
-  const days = book.deliveryDays || null;
+  // Use DELIVERY_DAYS per gov first, fallback to book.deliveryDays
+  const days = (DELIVERY_DAYS && DELIVERY_DAYS[gov]) || book.deliveryDays || null;
   const dBox = document.getElementById('summaryDeliveryDays');
   if (days) {
-    document.getElementById('summaryDaysText').textContent = `وقت التوصيل المتوقع: ${days} أيام عمل`;
+    document.getElementById('summaryDaysText').textContent = `وقت التوصيل المتوقع إلى ${gov}: ${days} أيام عمل`;
     dBox.style.display = 'block';
   } else {
     dBox.style.display = 'none';
@@ -3352,13 +3579,18 @@ async function processPurchase() {
   await sleep(1600);
   const delivery = DELIVERY_PRICES[gov] || 30;
   const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+  // Delivery days: prefer per-gov setting, then book.deliveryDays
+  const delivDays = (typeof DELIVERY_DAYS !== 'undefined' && DELIVERY_DAYS && DELIVERY_DAYS[gov])
+    || currentBuyBook.deliveryDays || 3;
   const order = {
     id: orderId, bookId: currentBuyBook.id, bookTitle: currentBuyBook.title,
     bookIcon: currentBuyBook.icon, bookCover: currentBuyBook.cover,
     price: currentBuyBook.price, delivery, total: currentBuyBook.price + delivery,
     phone, gov, city, status: 'pending',
-    date: new Date().toLocaleDateString('ar-EG'), timestamp: Date.now(),
-    deliveryDays: currentBuyBook.deliveryDays || null
+    date: new Date().toLocaleDateString('ar-EG'),
+    orderTimestamp: Date.now(),   // ← وقت الطلب بالميلي ثانية
+    deliveryDays: delivDays,
+    shippedNotified: false        // ← هل اتبعتت رسالة "تم الشحن"؟
   };
   ORDERS.push(order);
   localStorage.setItem('dhOrders', JSON.stringify(ORDERS));
@@ -3372,7 +3604,7 @@ async function processPurchase() {
     <div class="order-info-row"><span class="key">💳 الإجمالي</span><span class="val" style="font-weight:900;color:var(--primary)">${currentBuyBook.price + delivery} جنيه</span></div>
     <div class="order-info-row"><span class="key">📱 الهاتف</span><span class="val">${phone}</span></div>
     <div class="order-info-row"><span class="key">📍 المحافظة</span><span class="val">${gov} — ${city}</span></div>
-    ${order.deliveryDays ? `<div class="order-info-row"><span class="key">⏱️ وقت التوصيل</span><span class="val">${order.deliveryDays} أيام عمل</span></div>` : ''}
+    ${delivDays ? `<div class="order-info-row"><span class="key">⏱️ وقت التوصيل</span><span class="val">${delivDays} أيام عمل</span></div>` : ''}
     <div class="order-info-row"><span class="key">📅 تاريخ الطلب</span><span class="val">${order.date}</span></div>`;
   openModal('successModal');
   showToast('تم الدفع بنجاح! 🎉','success');
@@ -3384,6 +3616,8 @@ async function processPurchase() {
     checkBadgeProgress();
     pushNotification('✅ تم تأكيد طلبك!', `طلب ${currentBuyBook.title} رقم ${orderId} — سيتم التواصل معك قريباً`, 'order');
   }
+  // Start delivery countdown check
+  startDeliveryCountdownCheck();
 }
 async function sendTelegramMessage(phone, order) {
   const year = Object.entries(BOOKS).find(([y,bs])=>bs.find(b=>b.id===order.bookId))?.[0] || '?';
@@ -3420,37 +3654,176 @@ function goTrackOrder() { closeModal('successModal'); showPage('tracking'); }
 // ============================================================
 // TRACKING
 // ============================================================
+// ─── Delivery countdown helpers ─────────────────────────────
+function getDeliveryCountdown(order) {
+  if (!order.orderTimestamp || !order.deliveryDays) return null;
+  const MS_PER_DAY = 86400000;
+  const elapsed  = Date.now() - order.orderTimestamp;
+  const elapsedDays = elapsed / MS_PER_DAY;          // fractional days elapsed
+  const remaining   = order.deliveryDays - elapsedDays; // fractional days left
+  const daysLeft    = Math.ceil(remaining);           // ceil → فاضل كام يوم
+  const pct         = Math.min(100, Math.max(0, (elapsedDays / order.deliveryDays) * 100));
+  return { daysLeft, pct, done: remaining <= 0 };
+}
+
+function buildCountdownBadge(order) {
+  const cd = getDeliveryCountdown(order);
+  if (!cd) return '';
+  if (cd.done) {
+    return `<div style="margin-top:1rem;background:rgba(16,185,129,.1);border:1.5px solid var(--success);border-radius:14px;padding:.85rem 1rem;display:flex;align-items:center;gap:.65rem">
+      <div style="width:38px;height:38px;border-radius:50%;background:var(--success);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-box-open" style="color:#fff;font-size:.9rem"></i></div>
+      <div><div style="font-size:.88rem;font-weight:900;color:var(--success)">تم التوصيل! 🎉</div><div style="font-size:.72rem;color:var(--text3)">يفترض أن يكون طلبك وصل</div></div>
+    </div>`;
+  }
+  const barColor = cd.daysLeft <= 1 ? 'var(--danger)' : cd.daysLeft <= 2 ? 'var(--warning)' : 'var(--success)';
+  const urgency  = cd.daysLeft <= 1 ? '🔴 غداً آخر موعد' : cd.daysLeft <= 2 ? '🟡 قريباً' : '🟢 في الموعد';
+  return `
+    <div style="margin-top:1rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:.9rem 1rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem">
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <i class="fas fa-truck" style="color:${barColor};font-size:.9rem"></i>
+          <span style="font-size:.83rem;font-weight:800;color:var(--text)">موعد التوصيل المتوقع</span>
+        </div>
+        <span style="font-size:.72rem;font-weight:700;color:${barColor}">${urgency}</span>
+      </div>
+      <!-- Progress bar -->
+      <div style="height:8px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:.55rem">
+        <div style="height:100%;width:${cd.pct}%;background:${barColor};border-radius:99px;transition:width 1s"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--text3)">
+        <span>تاريخ الطلب</span>
+        <span style="font-weight:900;font-size:.88rem;color:${barColor}">${cd.daysLeft <= 0 ? 'اليوم!' : 'فاضل <b style="color:'+barColor+';font-size:.95rem">'+cd.daysLeft+'</b> يوم'}</span>
+        <span>يوم التوصيل</span>
+      </div>
+    </div>`;
+}
+
 function trackOrder() {
-  const input = document.getElementById('trackInput').value.trim().toUpperCase();
+  const input  = document.getElementById('trackInput').value.trim().toUpperCase();
   const result = document.getElementById('trackResult');
   if (!input) { showToast('أدخل رقم الطلب','warning'); return; }
-  const order = ORDERS.find(o => o.id.toUpperCase() === input);
+  const order  = ORDERS.find(o => o.id.toUpperCase() === input);
   result.style.display = 'block';
   if (!order) {
     result.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.5rem;text-align:center;color:var(--danger)"><i class="fas fa-circle-xmark" style="font-size:2.2rem;margin-bottom:.5rem;display:block"></i><strong>لم يتم العثور على الطلب</strong><p style="font-size:.8rem;color:var(--text3);margin-top:.3rem">تحقق من رقم الطلب وأعد المحاولة</p></div>`;
     return;
   }
-  result.innerHTML = `<div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem">
-    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
-      <div class="${order.bookCover}" style="width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas ${order.bookIcon}" style="color:#fff;font-size:1.1rem"></i></div>
-      <div style="flex:1"><div style="font-size:.88rem;font-weight:800;color:var(--text)">${order.bookTitle}</div><div style="font-size:.72rem;color:var(--text3)">${order.id} • ${order.date}</div></div>
-      <div style="font-size:.95rem;font-weight:900;color:var(--primary)">${order.price} ج</div>
-    </div>
-    <div class="track-steps">${getOrderSteps(order.status, order)}</div>
-  </div>`;
+
+  function renderTrackCard() {
+    result.innerHTML = `
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem">
+        <!-- Book header -->
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)">
+          <div class="${order.bookCover}" style="width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="fas ${order.bookIcon}" style="color:#fff;font-size:1.1rem"></i>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:.88rem;font-weight:800;color:var(--text)">${order.bookTitle}</div>
+            <div style="font-size:.72rem;color:var(--text3)">${order.id} • ${order.date}</div>
+            ${order.gov ? `<div style="font-size:.7rem;color:var(--primary);font-weight:700;margin-top:.1rem"><i class="fas fa-location-dot"></i> ${order.gov} — ${order.city||''}</div>` : ''}
+          </div>
+          <div style="font-size:.95rem;font-weight:900;color:var(--primary)">${order.total||order.price} ج</div>
+        </div>
+
+        <!-- Steps -->
+        <div class="track-steps">${getOrderSteps(order.status, order)}</div>
+
+        <!-- Countdown badge -->
+        ${buildCountdownBadge(order)}
+
+        <!-- Refresh note -->
+        <div style="margin-top:.75rem;font-size:.68rem;color:var(--text3);text-align:center">
+          <i class="fas fa-rotate-right"></i> يتحدث تلقائياً — آخر تحديث: <span id="lastRefreshTime">${new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})}</span>
+        </div>
+      </div>`;
+    // check & notify
+    checkAndSendShippingAlert(order);
+  }
+
+  renderTrackCard();
+
+  // Auto-refresh every 60s so countdown updates
+  if (window._trackRefreshTimer) clearInterval(window._trackRefreshTimer);
+  window._trackRefreshTimer = setInterval(() => {
+    const fresh = ORDERS.find(o => o.id.toUpperCase() === input);
+    if (fresh) {
+      Object.assign(order, fresh);
+      renderTrackCard();
+      const el = document.getElementById('lastRefreshTime');
+      if (el) el.textContent = new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
+    }
+  }, 60000);
 }
+
 function getOrderSteps(status, order) {
-  const s = ['received','processing','shipped','delivered'].indexOf(status||'pending');
-  const daysLabel = order && order.deliveryDays ? `(متوقع خلال ${order.deliveryDays} أيام)` : '';
+  const statuses = ['pending','received','processing','shipped','delivered'];
+  const idx = statuses.indexOf(status || 'pending');
+  const cd  = order ? getDeliveryCountdown(order) : null;
+  const daysLabel = cd
+    ? (cd.done ? 'في الطريق إليك — يفترض وصل! 🎉' : `في الطريق إليك — فاضل ${cd.daysLeft} يوم`)
+    : (order && order.deliveryDays ? `متوقع خلال ${order.deliveryDays} أيام` : '');
   return [
-    {icon:'fa-circle-check',label:'تم استلام الطلب',sub:'تم تأكيد طلبك بنجاح'},
-    {icon:'fa-gears',label:'جاري التجهيز',sub:'يتم تجهيز طلبك الآن'},
-    {icon:'fa-truck',label:'جاري الشحن',sub:`في الطريق إليك ${daysLabel}`},
-    {icon:'fa-box-open',label:'تم التسليم',sub:'استلمت طلبك بنجاح 🎉'}
-  ].map((st,i) => {
-    const cls = i < s+1 ? 'done' : i === s+1 ? 'active' : 'idle';
-    return `<div class="tstep"><div class="tdot ${cls}"><i class="fas ${st.icon}"></i></div><div class="tinfo"><h4>${st.label}</h4><p>${st.sub}</p></div></div>`;
+    {icon:'fa-circle-check', label:'تم استلام الطلب',  sub:'تم تأكيد طلبك بنجاح ✅'},
+    {icon:'fa-gears',         label:'جاري التجهيز',     sub:'يتم تجهيز طلبك الآن'},
+    {icon:'fa-truck',         label:'جاري الشحن',       sub: daysLabel || 'في الطريق إليك'},
+    {icon:'fa-box-open',      label:'تم التسليم',       sub:'استلمت طلبك بنجاح 🎉'}
+  ].map((st, i) => {
+    const done   = i < idx;
+    const active = i === idx;
+    const cls    = done ? 'done' : active ? 'active' : 'idle';
+    return `<div class="tstep">
+      <div class="tdot ${cls}"><i class="fas ${st.icon}"></i></div>
+      <div class="tinfo"><h4>${st.label}</h4><p>${st.sub}</p></div>
+    </div>`;
   }).join('');
+}
+
+// ─── إرسال رسالة "تم الشحن" لما يفضل يوم واحد ───────────────
+async function checkAndSendShippingAlert(order) {
+  if (!order || !order.orderTimestamp || !order.deliveryDays) return;
+  if (order.shippedNotified) return;                    // اتبعتت قبل كده
+  const cd = getDeliveryCountdown(order);
+  if (!cd) return;
+  if (cd.daysLeft > 1) return;                          // فاضل أكتر من يوم
+
+  // فاضل يوم واحد أو أقل → ابعت رسالة
+  const msg =
+    `🚚 *تم الشحن — منصة دكتور حجاج*\n` +
+    `━━━━━━━━━━━━━━━━━━\n` +
+    `📦 *رقم الطلب:* \`${order.id}\`\n` +
+    `📚 *الكتاب:* ${order.bookTitle}\n` +
+    `📍 *المحافظة:* ${order.gov||'—'} — ${order.city||'—'}\n` +
+    `📱 *الهاتف:* ${order.phone}\n` +
+    `━━━━━━━━━━━━━━━━━━\n` +
+    `✅ *تم شحن الطلب وهو في الطريق!*\n` +
+    `📅 موعد التسليم المتوقع: *غداً أو اليوم*\n\n` +
+    `👉 تواصل مع العميل لتأكيد الاستلام`;
+
+  try {
+    const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: msg, parse_mode:'Markdown' })
+    });
+    const d = await r.json();
+    if (d.ok) {
+      // حفظ إن الرسالة اتبعتت
+      const idx = ORDERS.findIndex(o => o.id === order.id);
+      if (idx !== -1) {
+        ORDERS[idx].shippedNotified = true;
+        localStorage.setItem('dhOrders', JSON.stringify(ORDERS));
+      }
+    }
+  } catch(e) { console.warn('Shipping alert error:', e); }
+}
+
+// ─── فحص دوري كل ساعة لأي طلب فاضله يوم ────────────────────
+function startDeliveryCountdownCheck() {
+  if (window._deliveryCheckInterval) return; // مشتغلة أصلاً
+  window._deliveryCheckInterval = setInterval(() => {
+    ORDERS.forEach(o => checkAndSendShippingAlert(o));
+  }, 3600000); // كل ساعة
+  // وكمان run فوراً
+  ORDERS.forEach(o => checkAndSendShippingAlert(o));
 }
 function renderMyOrdersTracking() {
   const c = document.getElementById('myOrdersList');
@@ -3647,27 +4020,41 @@ function renderAdminFull() {
 }
 
 // ─── Admin Delivery Prices ───────────────────────────────────
+let DELIVERY_DAYS = JSON.parse(localStorage.getItem('dhDeliveryDays')||'{}');
 function renderAdminDelivery() {
   const c = document.getElementById('adminDeliverySection');
   if (!c) return;
   c.innerHTML = `
     <div style="background:var(--card);border-radius:20px;padding:1.5rem;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1.5rem">
-      <h3 style="font-size:1rem;font-weight:900;margin-bottom:1.1rem;color:var(--text)"><i class="fas fa-truck" style="color:var(--primary);margin-left:.4rem"></i>تسعير التوصيل لكل محافظة</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.55rem">
-        ${EGYPT_GOVS.map(g=>`<div style="display:flex;align-items:center;gap:.5rem;background:var(--bg2);border-radius:10px;padding:.5rem .75rem;border:1px solid var(--border)">
-          <span style="flex:1;font-size:.82rem;font-weight:700;color:var(--text)">${g}</span>
-          <input type="number" min="0" max="999" value="${DELIVERY_PRICES[g]||30}"
-            style="width:65px;padding:.3rem .5rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-size:.82rem;font-family:'Cairo',sans-serif;text-align:center"
-            onchange="DELIVERY_PRICES['${g}']=+this.value">
-          <span style="font-size:.75rem;color:var(--text3)">ج</span>
+      <h3 style="font-size:1rem;font-weight:900;margin-bottom:.4rem;color:var(--text)"><i class="fas fa-truck" style="color:var(--primary);margin-left:.4rem"></i>تسعير التوصيل لكل محافظة</h3>
+      <p style="font-size:.75rem;color:var(--text3);margin-bottom:1rem">حدّد السعر وعدد أيام التوصيل لكل محافظة</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.55rem">
+        ${EGYPT_GOVS.map(g=>`
+        <div style="display:flex;align-items:center;gap:.5rem;background:var(--bg2);border-radius:10px;padding:.5rem .75rem;border:1px solid var(--border)">
+          <span style="flex:1;font-size:.82rem;font-weight:700;color:var(--text);min-width:80px">${g}</span>
+          <div style="display:flex;align-items:center;gap:.3rem">
+            <input type="number" min="0" max="999" value="${DELIVERY_PRICES[g]||30}"
+              title="سعر التوصيل بالجنيه"
+              style="width:58px;padding:.3rem .4rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-size:.8rem;font-family:'Cairo',sans-serif;text-align:center"
+              onchange="DELIVERY_PRICES['${g}']=+this.value">
+            <span style="font-size:.7rem;color:var(--text3)">ج</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.3rem;border-right:1px solid var(--border);padding-right:.5rem;margin-right:.1rem">
+            <input type="number" min="1" max="30" value="${DELIVERY_DAYS[g]||3}"
+              title="عدد أيام التوصيل"
+              style="width:46px;padding:.3rem .4rem;border-radius:8px;border:1.5px solid rgba(245,158,11,.4);background:rgba(245,158,11,.06);color:var(--text);font-size:.8rem;font-family:'Cairo',sans-serif;text-align:center"
+              onchange="DELIVERY_DAYS['${g}']=+this.value">
+            <span style="font-size:.7rem;color:var(--warning);font-weight:700">يوم</span>
+          </div>
         </div>`).join('')}
       </div>
-      <button class="btn btn-primary mt-3" onclick="saveDeliveryPrices()" style="padding:.6rem 1.5rem"><i class="fas fa-floppy-disk"></i>حفظ أسعار التوصيل</button>
+      <button class="btn btn-primary mt-3" onclick="saveDeliveryPrices()" style="padding:.6rem 1.5rem"><i class="fas fa-floppy-disk"></i>حفظ أسعار التوصيل والأيام</button>
     </div>`;
 }
 function saveDeliveryPrices() {
   localStorage.setItem('dhDelivery', JSON.stringify(DELIVERY_PRICES));
-  showToast('✅ تم حفظ أسعار التوصيل لجميع المحافظات','success');
+  localStorage.setItem('dhDeliveryDays', JSON.stringify(DELIVERY_DAYS));
+  showToast('✅ تم حفظ أسعار التوصيل وعدد الأيام لجميع المحافظات','success');
 }
 
 // ─── Admin Book Delivery Days ────────────────────────────────
@@ -6189,8 +6576,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { document.getElementById('loader').classList.add('hide'); }, 2500);
   // Hero particles
   initHeroParticles();
-  // Render books page
-  renderBooksPage();
+  // Render books page (السنة الأولى افتراضياً)
+  if (typeof renderBooks === 'function') renderBooks(1);
   updateOrdersNotificationBadge();
 });
 
@@ -6327,32 +6714,45 @@ function renderAdminDeliveryTab() {
   const sec = document.getElementById('adminDeliverySection');
   if (!sec) return;
 
-  // Delivery Prices per Governorate
+  // Delivery Prices + Days per Governorate
   let govRows = EGYPT_GOVS.map(g => `
-    <div style="display:flex;align-items:center;gap:.75rem;padding:.6rem .9rem;background:var(--bg2);border-radius:12px;margin-bottom:.45rem;border:1px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:.6rem;padding:.55rem .85rem;background:var(--bg2);border-radius:12px;margin-bottom:.45rem;border:1px solid var(--border)">
       <i class="fas fa-location-dot" style="color:var(--primary);font-size:.85rem;width:18px;flex-shrink:0"></i>
       <div style="flex:1;font-size:.85rem;font-weight:700;color:var(--text)">${g}</div>
-      <div style="display:flex;align-items:center;gap:.35rem;flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:.3rem;flex-shrink:0">
         <input type="number" min="0" max="999" value="${DELIVERY_PRICES[g]||30}"
-          style="width:64px;padding:.35rem .5rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-family:'Cairo',sans-serif;font-size:.83rem;font-weight:700;text-align:center;outline:none"
+          title="سعر التوصيل (جنيه)"
+          style="width:58px;padding:.35rem .4rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-family:'Cairo',sans-serif;font-size:.83rem;font-weight:700;text-align:center;outline:none"
           onchange="updateDeliveryPrice('${g}',this.value)"
           onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
-        <span style="font-size:.72rem;color:var(--text3)">ج</span>
+        <span style="font-size:.7rem;color:var(--text3)">ج</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.3rem;flex-shrink:0;border-right:1px solid var(--border);padding-right:.5rem">
+        <input type="number" min="1" max="30" value="${(DELIVERY_DAYS&&DELIVERY_DAYS[g])||3}"
+          title="عدد أيام التوصيل"
+          style="width:44px;padding:.35rem .4rem;border-radius:8px;border:1.5px solid rgba(245,158,11,.4);background:rgba(245,158,11,.06);color:var(--text);font-family:'Cairo',sans-serif;font-size:.83rem;font-weight:700;text-align:center;outline:none"
+          onchange="if(!DELIVERY_DAYS)DELIVERY_DAYS={};DELIVERY_DAYS['${g}']=+this.value"
+          onfocus="this.style.borderColor='var(--warning)'" onblur="this.style.borderColor='rgba(245,158,11,.4)'">
+        <span style="font-size:.7rem;color:var(--warning);font-weight:700">يوم</span>
       </div>
     </div>`).join('');
 
   sec.innerHTML = `
     <div style="background:var(--card);border-radius:22px;padding:1.5rem;border:1.5px solid var(--border)">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.5rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;flex-wrap:wrap;gap:.5rem">
         <h3 style="font-size:1rem;font-weight:900;color:var(--text);display:flex;align-items:center;gap:.5rem">
-          <i class="fas fa-truck" style="color:var(--primary)"></i>أسعار التوصيل للمحافظات
+          <i class="fas fa-truck" style="color:var(--primary)"></i>أسعار وأيام التوصيل للمحافظات
         </h3>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap">
           <button onclick="setAllDelivery(30)" class="btn btn-ghost" style="padding:.4rem .8rem;font-size:.76rem"><i class="fas fa-rotate-left"></i>إعادة تعيين (30ج)</button>
           <button onclick="saveAllDeliveryPrices()" class="btn btn-primary" style="padding:.4rem .9rem;font-size:.76rem"><i class="fas fa-floppy-disk"></i>حفظ الكل</button>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.5rem">
+      <div style="font-size:.72rem;color:var(--text3);margin-bottom:.85rem;display:flex;align-items:center;gap:1rem">
+        <span><span style="font-weight:800;color:var(--text)">السعر</span> = رسوم التوصيل بالجنيه</span>
+        <span style="color:var(--warning);font-weight:700"><span style="font-weight:800;color:var(--text)">الأيام</span> = مدة التوصيل المتوقعة</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.5rem">
         ${govRows}
       </div>
     </div>`;
@@ -6371,7 +6771,8 @@ function setAllDelivery(price) {
 
 function saveAllDeliveryPrices() {
   localStorage.setItem('dhDelivery', JSON.stringify(DELIVERY_PRICES));
-  showToast('✅ تم حفظ أسعار التوصيل', 'success');
+  if (typeof DELIVERY_DAYS !== 'undefined') localStorage.setItem('dhDeliveryDays', JSON.stringify(DELIVERY_DAYS));
+  showToast('✅ تم حفظ أسعار وأيام التوصيل', 'success');
 }
 
 // ── Packages Admin Tab ──
@@ -7137,14 +7538,171 @@ switchAdminTab = function(tab) {
   } else if (tab === 'packages') {
     if (packagesSec) { packagesSec.style.display = ''; renderAdminPackagesTab(); }
   } else if (tab === 'settings') {
-    mainWraps.forEach(el => el.style.display = '');
-    renderAdminFull();
+    // Show dedicated settings section
+    let settingsSec = document.getElementById('adminBotSettingsSection');
+    if (!settingsSec) {
+      settingsSec = document.createElement('div');
+      settingsSec.id = 'adminBotSettingsSection';
+      // Insert after the admin tabs area
+      const adminContent = document.getElementById('adminTabsArea');
+      if (adminContent && adminContent.parentNode) {
+        adminContent.parentNode.insertBefore(settingsSec, adminContent.nextSibling);
+      }
+    }
+    settingsSec.style.display = '';
+    renderAdminBotSettings(settingsSec);
   } else if (tab === 'livechat') {
     if (livechatSec) { livechatSec.style.display = ''; renderAdminLiveChat(); }
   }
 };
 
-// Add QR button to the admin page header
+// ============================================================
+// ★ ADMIN BOT SETTINGS — عدد أيام رسالة الترحيب
+// ============================================================
+let BOT_SETTINGS = JSON.parse(localStorage.getItem('dhBotSettings') || '{}');
+
+function renderAdminBotSettings(container) {
+  const days = BOT_SETTINGS.welcomeDays ?? 7;
+  const msg  = BOT_SETTINGS.welcomeMsg  ?? 'أهلاً! 👋 منصة دكتور حجاج التعليمية\nفاضل {days} أيام على انتهاء العرض الحالي — اشتري كتابك الآن بأفضل الأسعار 🎓📚';
+  container.innerHTML = `
+    <div style="padding:1.5rem;max-width:720px;margin:0 auto">
+      <div style="background:var(--card);border-radius:20px;padding:1.5rem;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1.5rem">
+        <h3 style="font-size:1rem;font-weight:900;margin-bottom:.3rem;color:var(--text)">
+          <i class="fab fa-telegram" style="color:#0088cc;margin-left:.4rem"></i>إعدادات رسالة بوت تيليجرام
+        </h3>
+        <p style="font-size:.75rem;color:var(--text3);margin-bottom:1.25rem">أول رسالة يبعتها البوت لأي مستخدم جديد يتواصل معاه</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+          <div class="form-group" style="margin:0">
+            <label class="form-label"><i class="fas fa-calendar-days" style="color:var(--warning);margin-left:.3rem"></i>عدد الأيام المتبقية على العرض</label>
+            <div style="display:flex;align-items:center;gap:.5rem">
+              <input type="number" min="0" max="365" value="${days}" id="botWelcomeDays"
+                style="flex:1;padding:.55rem .75rem;border-radius:10px;border:2px solid var(--border);background:var(--bg2);color:var(--text);font-size:1rem;font-weight:900;font-family:'Cairo',sans-serif;text-align:center">
+              <span style="font-size:.85rem;font-weight:700;color:var(--text2);white-space:nowrap">يوم</span>
+            </div>
+            <div style="font-size:.7rem;color:var(--text3);margin-top:.35rem">استخدم <code style="background:var(--bg2);padding:.1rem .3rem;border-radius:4px">{days}</code> في الرسالة وهيتعوّض بالرقم تلقائياً</div>
+          </div>
+          <div class="form-group" style="margin:0">
+            <label class="form-label"><i class="fas fa-toggle-on" style="color:var(--success);margin-left:.3rem"></i>حالة الرسالة</label>
+            <div onclick="toggleBotWelcome(this)"
+              style="display:flex;align-items:center;gap:.75rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:.65rem .9rem;cursor:pointer;margin-top:.2rem">
+              <div class="toggle-sw ${BOT_SETTINGS.welcomeEnabled!==false?'on':''}" id="botWelcomeToggleSw"><div class="toggle-knob"></div></div>
+              <span style="font-size:.85rem;font-weight:700;color:var(--text2)" id="botWelcomeToggleLabel">${BOT_SETTINGS.welcomeEnabled!==false?'مفعّلة':'معطّلة'}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-message" style="color:var(--primary);margin-left:.3rem"></i>نص رسالة الترحيب</label>
+          <textarea id="botWelcomeMsgTxt" rows="5"
+            style="width:100%;padding:.75rem .9rem;border-radius:12px;border:1.5px solid var(--border);background:var(--bg2);color:var(--text);font-size:.85rem;font-family:'Cairo',sans-serif;resize:vertical;line-height:1.7"
+          >${msg}</textarea>
+          <div style="font-size:.7rem;color:var(--text3);margin-top:.3rem">يمكن استخدام <code style="background:var(--bg2);padding:.1rem .3rem;border-radius:4px">{days}</code> لعرض عدد الأيام تلقائياً</div>
+        </div>
+
+        <!-- Preview -->
+        <div style="background:linear-gradient(135deg,#0088cc15,#0088cc08);border:1.5px solid #0088cc30;border-radius:14px;padding:1rem;margin-bottom:1rem">
+          <div style="font-size:.72rem;font-weight:700;color:#0088cc;margin-bottom:.5rem"><i class="fab fa-telegram"></i> معاينة الرسالة</div>
+          <div id="botMsgPreview" style="font-size:.82rem;color:var(--text);white-space:pre-line;line-height:1.75;background:var(--card);border-radius:10px;padding:.75rem 1rem;border:1px solid var(--border)"></div>
+        </div>
+
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="saveBotSettings()" style="flex:1;justify-content:center;padding:.65rem 1.2rem">
+            <i class="fas fa-floppy-disk"></i>حفظ الإعدادات
+          </button>
+          <button class="btn btn-ghost" onclick="testBotWelcomeMsg()" style="padding:.65rem 1.2rem">
+            <i class="fab fa-telegram"></i>اختبار الإرسال
+          </button>
+        </div>
+      </div>
+
+      <!-- DELIVERY SETTINGS also shown here -->
+      <div id="adminDeliverySection"></div>
+    </div>`;
+
+  // live preview
+  updateBotPreview();
+  document.getElementById('botWelcomeDays').addEventListener('input', updateBotPreview);
+  document.getElementById('botWelcomeMsgTxt').addEventListener('input', updateBotPreview);
+  // Also render delivery
+  renderAdminDelivery();
+}
+
+function updateBotPreview() {
+  const days = document.getElementById('botWelcomeDays')?.value || '7';
+  const txt  = document.getElementById('botWelcomeMsgTxt')?.value || '';
+  const preview = document.getElementById('botMsgPreview');
+  if (preview) preview.textContent = txt.replace(/\{days\}/g, days);
+}
+
+function toggleBotWelcome(el) {
+  const sw = document.getElementById('botWelcomeToggleSw');
+  const lbl = document.getElementById('botWelcomeToggleLabel');
+  const enabled = !sw.classList.contains('on');
+  sw.classList.toggle('on', enabled);
+  lbl.textContent = enabled ? 'مفعّلة' : 'معطّلة';
+  BOT_SETTINGS.welcomeEnabled = enabled;
+}
+
+function saveBotSettings() {
+  BOT_SETTINGS.welcomeDays    = parseInt(document.getElementById('botWelcomeDays')?.value) || 7;
+  BOT_SETTINGS.welcomeMsg     = document.getElementById('botWelcomeMsgTxt')?.value || '';
+  BOT_SETTINGS.welcomeEnabled = document.getElementById('botWelcomeToggleSw')?.classList.contains('on');
+  localStorage.setItem('dhBotSettings', JSON.stringify(BOT_SETTINGS));
+  showToast('✅ تم حفظ إعدادات البوت','success');
+}
+
+async function testBotWelcomeMsg() {
+  const days = document.getElementById('botWelcomeDays')?.value || '7';
+  const txt  = document.getElementById('botWelcomeMsgTxt')?.value || '';
+  const msg  = txt.replace(/\{days\}/g, days);
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: '🔔 *معاينة رسالة الترحيب:*\n\n' + msg, parse_mode:'Markdown' })
+    });
+    const d = await res.json();
+    if (d.ok) showToast('✅ تم إرسال الرسالة للأدمن كاختبار','success');
+    else showToast('❌ خطأ في الإرسال','error');
+  } catch(e) { showToast('❌ تعذّر الوصول للبوت','error'); }
+}
+
+// ── Hook: أرسل رسالة ترحيب البوت أول ما يبدأ المستخدم محادثة ──────────
+(function patchBotWelcome() {
+  const _origInitChat = window.initChat;
+  window.initChat = function(...args) {
+    const result = _origInitChat ? _origInitChat(...args) : undefined;
+    sendBotWelcomeIfNeeded();
+    return result;
+  };
+  // Also patch openChat/toggleChat first call
+  const _origToggleChat = window.toggleChat;
+  let _chatWelcomeSent = !!sessionStorage.getItem('dhChatWelcomeSent');
+  window.toggleChat = function(...args) {
+    const result = _origToggleChat ? _origToggleChat(...args) : undefined;
+    if (!_chatWelcomeSent) {
+      _chatWelcomeSent = true;
+      sessionStorage.setItem('dhChatWelcomeSent','1');
+      setTimeout(sendBotWelcomeIfNeeded, 600);
+    }
+    return result;
+  };
+})();
+
+function sendBotWelcomeIfNeeded() {
+  const settings = JSON.parse(localStorage.getItem('dhBotSettings') || '{}');
+  if (settings.welcomeEnabled === false) return;
+  const days = settings.welcomeDays ?? 7;
+  const template = settings.welcomeMsg ?? 'أهلاً! 👋 منصة دكتور حجاج التعليمية\nفاضل {days} أيام على انتهاء العرض الحالي — اشتري كتابك الآن بأفضل الأسعار 🎓📚';
+  const msg = template.replace(/\{days\}/g, days);
+  // Show as first bot message in chat (after a small delay so user sees it as a bot response)
+  setTimeout(() => {
+    if (typeof addBotMessage === 'function') {
+      addBotMessage('🎯 ' + msg);
+    }
+  }, 400);
+}
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const adminPageTop = document.querySelector('#page-admin .page-top .container > div');
@@ -7174,6 +7732,186 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(fab);
   }, 500);
 });
+</script>
+
+<!-- ===== بانر التحديث ===== -->
+<div class="update-banner" id="updateBanner">
+  <div class="update-banner-icon"><i class="fas fa-rocket"></i></div>
+  <div class="update-banner-text">
+    <div class="update-banner-title">🎉 تحديث جديد متاح!</div>
+    <div class="update-banner-sub" id="updateBannerVer">نسخة جديدة من التطبيق</div>
+  </div>
+  <button class="update-banner-btn" onclick="downloadUpdate()">حمّل</button>
+  <button class="update-banner-close" onclick="dismissUpdate()"><i class="fas fa-xmark"></i></button>
+</div>
+
+<!-- ===== APK DOWNLOAD MODAL ===== -->
+<div class="apk-modal-overlay" id="apkModalOverlay" onclick="handleApkOverlayClick(event)">
+  <div class="apk-modal">
+    <div class="apk-modal-head">
+      <div class="apk-android-icon">
+        <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.523 15.341a.75.75 0 0 1-.75.75H7.227a.75.75 0 0 1 0-1.5h9.546a.75.75 0 0 1 .75.75ZM6.48 8.119l1.557 2.697a5.266 5.266 0 0 0-.783 2.746.75.75 0 0 0 1.5 0 3.763 3.763 0 0 1 3.76-3.76 3.763 3.763 0 0 1 3.76 3.76.75.75 0 0 0 1.5 0 5.266 5.266 0 0 0-.783-2.746l1.557-2.697a.75.75 0 0 0-1.3-.75l-1.476 2.557a5.244 5.244 0 0 0-3.258-.998 5.244 5.244 0 0 0-3.258.998L7.78 7.369a.75.75 0 0 0-1.3.75Zm6.034-1.244a.563.563 0 1 0 0-1.125.563.563 0 0 0 0 1.125Zm-2.25 0a.563.563 0 1 0 0-1.125.563.563 0 0 0 0 1.125Z"/>
+        </svg>
+      </div>
+      <h3>تطبيق د. حجاج للأندرويد</h3>
+      <p>تنزيل مجاني — بدون متجر تطبيقات</p>
+    </div>
+    <div class="apk-modal-body">
+      <div class="apk-info-row">
+        <span class="apk-info-label"><i class="fas fa-mobile-screen" style="color:var(--primary);margin-left:.4rem"></i>الإصدار</span>
+        <span class="apk-version-badge">v1.0.0</span>
+      </div>
+      <div class="apk-info-row">
+        <span class="apk-info-label"><i class="fas fa-shield-halved" style="color:#3ddc84;margin-left:.4rem"></i>الأمان</span>
+        <span class="apk-info-val" style="color:#3ddc84;font-size:.78rem">✓ آمن ومعتمد</span>
+      </div>
+      <div class="apk-info-row">
+        <span class="apk-info-label"><i class="fas fa-circle-info" style="color:var(--warning);margin-left:.4rem"></i>قبل التنزيل</span>
+        <span class="apk-info-val" style="font-size:.72rem;color:var(--text2)">فعّل "مصادر غير معروفة"</span>
+      </div>
+
+      <!-- زرار التحميل — الرابط هيتحدث لما يبعت الـ APK -->
+      <a id="apkDownloadLink" href="#" onclick="handleApkDownload(event)"
+        class="apk-dl-main" style="text-decoration:none">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+        تحميل التطبيق
+      </a>
+
+      <button class="apk-cancel" onclick="closeApkModal()">إلغاء</button>
+      <p class="apk-note">
+        ⚙️ بعد التنزيل: الإعدادات ← الأمان ← تثبيت تطبيقات غير معروفة
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// ★ نظام تحديث التطبيق
+// ══════════════════════════════════════════════════════════════
+// ← غيّر الرقم ده لما ترفع APK جديد (مثلاً 2، 3، 4...)
+//   التطبيق هيحس تلقائياً ويظهر بانر "فيه تحديث"
+const APP_VERSION = 1;
+
+// ← رابط الـ APK الحالي
+const APK_URL = 'https://drive.google.com/uc?export=download&id=1ZHALn008_P0Z_mhYkoVkcVk8GbwQlIit';
+
+// ── منطق التحقق من التحديث ───────────────────────────────────
+(function checkAppUpdate() {
+  // الإشعار يظهر فقط لو الموقع مفتوح جوا تطبيق WebView (مش متصفح عادي)
+  const isWebView = /wv|WebView/.test(navigator.userAgent) ||
+    ((/android/i.test(navigator.userAgent)) && !/chrome/i.test(navigator.userAgent)) ||
+    window.navigator.standalone === true;
+
+  const savedVer = parseInt(localStorage.getItem('dhAppVersion') || '0');
+
+  if (savedVer === 0) {
+    // أول مرة — خزّن الإصدار بدون ما تظهر إشعار
+    localStorage.setItem('dhAppVersion', APP_VERSION);
+    return;
+  }
+
+  if (APP_VERSION > savedVer) {
+    // فيه تحديث جديد!
+    setTimeout(() => {
+      const banner = document.getElementById('updateBanner');
+      const verEl  = document.getElementById('updateBannerVer');
+      if (banner) {
+        if (verEl) verEl.textContent = `v${savedVer}.0 ← v${APP_VERSION}.0 جاهزة`;
+        banner.classList.add('show');
+        // يختفي تلقائياً بعد 12 ثانية لو مضغطش عليه
+        setTimeout(() => banner.classList.remove('show'), 12000);
+      }
+    }, 3000);
+  }
+})();
+
+function downloadUpdate() {
+  document.getElementById('updateBanner').classList.remove('show');
+  localStorage.setItem('dhAppVersion', APP_VERSION);
+  // افتح modal التحميل
+  openApkModal();
+}
+
+function dismissUpdate() {
+  document.getElementById('updateBanner').classList.remove('show');
+  // مش هيظهر تاني في نفس الجلسة
+  localStorage.setItem('dhAppVersion', APP_VERSION);
+}
+
+// ── دوال الـ modal ────────────────────────────────────────────
+function openApkModal() {
+  document.getElementById('apkModalOverlay').classList.add('open');
+}
+
+function closeApkModal() {
+  document.getElementById('apkModalOverlay').classList.remove('open');
+}
+
+function handleApkOverlayClick(e) {
+  if (e.target === document.getElementById('apkModalOverlay')) closeApkModal();
+}
+
+function handleApkDownload(e) {
+  if (!APK_URL || APK_URL === '') {
+    e.preventDefault();
+    if (typeof showToast === 'function')
+      showToast('⏳ التطبيق قيد الإعداد، سيتوفر قريباً!', 'warning');
+    return;
+  }
+  document.getElementById('apkDownloadLink').href = APK_URL;
+  document.getElementById('apkDownloadLink').download = 'dr-hagag-app.apk';
+  closeApkModal();
+  if (typeof showToast === 'function')
+    showToast('⬇️ جاري تحميل التطبيق...', 'success');
+}
+
+// ── Security: Input XSS filter ───────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input[type="text"],input[type="search"],textarea').forEach(el => {
+    el.addEventListener('input', function () {
+      if (/<script|javascript:|on\w+\s*=|<iframe|<object/i.test(this.value)) {
+        this.value = this.value.replace(/<[^>]*>/g, '');
+        if (typeof showToast === 'function') showToast('⚠️ محتوى غير مسموح تم حذفه', 'warning');
+      }
+    });
+  });
+});
+
+// ── Security: Rate limiter ────────────────────────────────────
+const _rl = (() => {
+  const map = {};
+  return (key, max = 5, ms = 30000) => {
+    const now = Date.now();
+    map[key] = (map[key] || []).filter(t => now - t < ms);
+    if (map[key].length >= max) return false;
+    map[key].push(now); return true;
+  };
+})();
+
+const _origLogin = window.login;
+if (typeof _origLogin === 'function') {
+  window.login = function (...a) {
+    if (!_rl('login')) { if (typeof showToast==='function') showToast('⛔ محاولات كثيرة، انتظر قليلاً','danger'); return; }
+    return _origLogin.apply(this, a);
+  };
+}
+
+// ── Security: URL param sanitizer ────────────────────────────
+(function () {
+  const bad = /<script|javascript:|union\s+select|drop\s+table/i;
+  new URLSearchParams(location.search).forEach(v => {
+    if (bad.test(v)) history.replaceState({}, '', location.pathname);
+  });
+})();
+
+// ── Security: DevTools self-XSS warning ──────────────────────
+if (!sessionStorage._dw) {
+  console.log('%c⚠️ تحذير أمني', 'font-size:22px;font-weight:900;color:#ef4444');
+  console.log('%cهذا المكان للمطورين فقط. لا تلصق أي كود هنا!', 'font-size:13px;font-weight:700;color:#f59e0b');
+  sessionStorage._dw = 1;
+}
 </script>
 </body>
 </html>
@@ -7548,14 +8286,23 @@ let currentPayMethod = 'code';
 
 function selectPayMethod(method) {
   currentPayMethod = method;
-  // Update UI
+  // Update UI — code
   document.getElementById('pm-code').style.borderColor = method === 'code' ? 'var(--primary)' : 'var(--border)';
   document.getElementById('pm-code').style.background   = method === 'code' ? 'rgba(37,99,235,.07)' : 'var(--bg2)';
+  // balance
   document.getElementById('pm-balance').style.borderColor = method === 'balance' ? '#f59e0b' : 'var(--border)';
   document.getElementById('pm-balance').style.background   = method === 'balance' ? 'rgba(245,158,11,.07)' : 'var(--bg2)';
+  // card
+  const pmCard = document.getElementById('pm-card');
+  if (pmCard) {
+    pmCard.style.borderColor = method === 'card' ? '#7c3aed' : 'var(--border)';
+    pmCard.style.background   = method === 'card' ? 'rgba(124,58,237,.07)' : 'var(--bg2)';
+  }
 
   document.getElementById('payByCodeSection').style.display    = method === 'code'    ? 'block' : 'none';
   document.getElementById('payByBalanceSection').style.display = method === 'balance' ? 'block' : 'none';
+  const cardSec = document.getElementById('payByCardSection');
+  if (cardSec) cardSec.style.display = method === 'card' ? 'block' : 'none';
 
   if (method === 'balance') {
     const bal = getUserBalance();
@@ -7565,6 +8312,177 @@ function selectPayMethod(method) {
     const warn = document.getElementById('balanceNotEnoughWarn');
     if (warn) warn.style.display = (bal < total && total > 0) ? 'block' : 'none';
   }
+}
+
+// ============================================================
+// ★ PAYMOB CARD PAYMENT INTEGRATION
+// ============================================================
+// ⚠️ ضع بياناتك هنا من لوحة تحكم Paymob
+const PAYMOB_API_KEY        = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFMU1qa3hPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5VaGdRZXFpeWptZ3lGWGs2NDhUczJKeDA2SGFjX0FOclE2cU9wT0RzNjlkLUxnU085SlRpWF8zYS1UdmJsODZjSzYwdUJZM0xZRFdLR3VQWHRsYWdXdw==';       // من Settings > Account Info
+const PAYMOB_INTEGRATION_ID = 5614077;                          // من Developers > Payment Integrations (رقم Card Online)
+const PAYMOB_IFRAME_ID      = 1032526;                          // من Developers > iframes
+
+async function payWithCard() {
+  if (!USER || !currentBuyBook) return;
+  const phone = document.getElementById('buyPhone')?.value?.trim();
+  const gov   = document.getElementById('buyGov')?.value;
+  const city  = document.getElementById('buyCity')?.value?.trim() || 'Cairo';
+  if (!phone || phone.length < 10) { showToast('أدخل رقم تليفونك أولاً', 'warning'); return; }
+  if (!gov)   { showToast('اختر المحافظة أولاً', 'warning'); return; }
+
+  // Validate config
+  if (PAYMOB_API_KEY === 'YOUR_API_KEY_HERE' || !PAYMOB_INTEGRATION_ID || !PAYMOB_IFRAME_ID) {
+    showToast('⚙️ يرجى إعداد بيانات Paymob أولاً في الكود', 'warning');
+    return;
+  }
+
+  const delivery = (typeof DELIVERY_PRICES !== 'undefined' && DELIVERY_PRICES[gov]) ? DELIVERY_PRICES[gov] : 30;
+  const total    = currentBuyBook.price + delivery;
+  const amountCents = total * 100; // Paymob uses piasters
+
+  const btn = document.getElementById('cardPayBtn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التحضير...'; }
+
+  try {
+    // ── Step 1: Auth Token ──────────────────────────────────
+    const authRes = await fetch('https://accept.paymob.com/api/auth/tokens', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: PAYMOB_API_KEY })
+    });
+    if (!authRes.ok) throw new Error('Auth failed');
+    const { token: authToken } = await authRes.json();
+
+    // ── Step 2: Create Order ────────────────────────────────
+    const orderRes = await fetch('https://accept.paymob.com/api/ecommerce/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        auth_token: authToken,
+        delivery_needed: false,
+        amount_cents: amountCents,
+        currency: 'EGP',
+        items: [{
+          name: currentBuyBook.title,
+          amount_cents: amountCents,
+          description: 'كتاب - منصة دكتور حجاج',
+          quantity: 1
+        }]
+      })
+    });
+    if (!orderRes.ok) throw new Error('Order failed');
+    const { id: paymobOrderId } = await orderRes.json();
+
+    // ── Step 3: Payment Key ─────────────────────────────────
+    const nameParts = (USER.name || 'مستخدم').split(' ');
+    const pkRes = await fetch('https://accept.paymob.com/api/acceptance/payment_keys', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        auth_token: authToken,
+        amount_cents: amountCents,
+        expiration: 3600,
+        order_id: paymobOrderId,
+        billing_data: {
+          apartment:     'NA',
+          email:         USER.email || 'customer@drhajjaj.com',
+          floor:         'NA',
+          first_name:    nameParts[0] || 'مستخدم',
+          last_name:     nameParts[1] || 'المنصة',
+          street:        city,
+          building:      'NA',
+          phone_number:  phone,
+          shipping_method: 'NA',
+          postal_code:   'NA',
+          city:          gov,
+          country:       'EG',
+          state:         gov
+        },
+        currency: 'EGP',
+        integration_id: PAYMOB_INTEGRATION_ID
+      })
+    });
+    if (!pkRes.ok) throw new Error('Payment key failed');
+    const { token: paymentKey } = await pkRes.json();
+
+    // ── Step 4: Open Paymob iFrame ──────────────────────────
+    openPaymobModal(paymentKey, paymobOrderId, total, delivery, phone, gov, city);
+
+  } catch (err) {
+    console.error('Paymob error:', err);
+    showToast('حدث خطأ أثناء الاتصال بـ Paymob. حاول مرة أخرى.', 'danger');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-credit-card"></i>ادفع بالبطاقة الآن'; }
+  }
+}
+
+function openPaymobModal(paymentKey, paymobOrderId, total, delivery, phone, gov, city) {
+  const overlay = document.getElementById('paymobOverlay');
+  const iframe  = document.getElementById('paymobIframe');
+  const spinner = document.getElementById('paymobLoadingSpinner');
+  if (!overlay || !iframe) return;
+
+  // Store pending order data to use after callback
+  window._pendingCardOrder = { paymobOrderId, total, delivery, phone, gov, city };
+
+  overlay.style.display = 'flex';
+  spinner.style.display = 'block';
+  iframe.style.display  = 'none';
+  iframe.src = `https://accept.paymob.com/api/acceptance/iframes/${PAYMOB_IFRAME_ID}?payment_token=${paymentKey}`;
+  iframe.onload = () => { spinner.style.display = 'none'; iframe.style.display = 'block'; };
+}
+
+function closePaymobModal() {
+  const overlay = document.getElementById('paymobOverlay');
+  const iframe  = document.getElementById('paymobIframe');
+  if (overlay) overlay.style.display = 'none';
+  if (iframe)  { iframe.src = ''; iframe.style.display = 'none'; }
+}
+
+// Listen for Paymob success/fail callback via postMessage or URL change
+window.addEventListener('message', function(e) {
+  // Paymob may send postMessage from iframe (depends on version)
+  if (!e.data) return;
+  try {
+    const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+    if (data.success === true || data.success === 'true') {
+      closePaymobModal();
+      _finalizeCardOrder();
+    } else if (data.success === false || data.success === 'false') {
+      closePaymobModal();
+      showToast('❌ فشلت عملية الدفع. حاول مرة أخرى أو جرب طريقة دفع أخرى.', 'danger');
+    }
+  } catch (_) {}
+});
+
+function _finalizeCardOrder() {
+  const p = window._pendingCardOrder;
+  if (!p || !currentBuyBook || !USER) return;
+  const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+  const order = {
+    id: orderId, bookId: currentBuyBook.id, bookTitle: currentBuyBook.title,
+    bookIcon: currentBuyBook.icon, bookCover: currentBuyBook.cover,
+    price: currentBuyBook.price, delivery: p.delivery, total: p.total,
+    phone: p.phone, gov: p.gov, city: p.city,
+    payMethod: 'card', date: new Date().toLocaleDateString('ar'),
+    status: 'processing', paymobOrderId: p.paymobOrderId
+  };
+  const orders = JSON.parse(localStorage.getItem('dhOrders') || '[]');
+  orders.push(order);
+  localStorage.setItem('dhOrders', JSON.stringify(orders));
+  // Add to library
+  const lib = JSON.parse(localStorage.getItem('dhLibrary') || '[]');
+  if (!lib.includes(currentBuyBook.id)) { lib.push(currentBuyBook.id); localStorage.setItem('dhLibrary', JSON.stringify(lib)); }
+  closeModal('purchaseModal');
+  showSuccessModal(orderId, order);
+  showToast('✅ تم الدفع بنجاح بالبطاقة! 🎉', 'success');
+  // WhatsApp notify
+  try {
+    const waMsg = encodeURIComponent(`✅ *طلب جديد — دفع بطاقة بنكية*\n📦 الطلب: ${orderId}\n📚 الكتاب: ${currentBuyBook.title}\n💰 الإجمالي: ${p.total} ج\n📍 المحافظة: ${p.gov}\n📞 التليفون: ${p.phone}`);
+    const waNum = typeof WHATSAPP_NUMBER !== 'undefined' ? WHATSAPP_NUMBER : '';
+    if (waNum) window.open(`https://wa.me/${waNum}?text=${waMsg}`, '_blank');
+  } catch(e){}
+  window._pendingCardOrder = null;
 }
 
 // Patch openBuyModal to refresh payment method UI
@@ -8245,7 +9163,7 @@ function renderWAChatPanel() {
     <button class="wa-qr-btn" onclick="sendQuickAdminReply('تم استلام طلبك وسيتم التواصل معك قريباً ✅')">📦 تأكيد</button>
     <button class="wa-qr-btn" onclick="sendQuickAdminReply('للتواصل: واتساب 01140137374 📞')">📞 واتساب</button>
     <button class="wa-qr-btn" onclick="sendQuickAdminReply('جاري التحقق من طلبك الآن... 🔍')">🔍 فحص</button>
-    ${isPending ? `<button class="wa-close-btn" onclick="closeAdminChat('${chat.id}')"><i class="fas fa-check"></i> إغلاق</button>` : ''}
+    ${isPending ? `<button class="wa-close-btn" onclick="closeEscalatedChat('${chat.id}')"><i class="fas fa-check"></i> إغلاق</button>` : ''}
   </div>
   <!-- Input -->
   ${isPending ? `
@@ -8338,7 +9256,7 @@ function _appendAdminMessage(text) {
   }
 }
 
-function closeAdminChat(id) {
+function closeEscalatedChat(id) {
   const idx = escalatedConversations.findIndex(c => c.id === id);
   if (idx !== -1) {
     escalatedConversations[idx].status = 'closed';
@@ -8403,6 +9321,37 @@ window.showQuizResult = function(score, total, subject) {
 };
 
 // ============================================================
+// ★ ANDROID BOTTOM NAV
+// ============================================================
+function updateBN(page) {
+  document.querySelectorAll('.bn-item').forEach(el => el.classList.remove('active'));
+  const map = {home:'bnHome',books:'bnBooks',library:'bnLibrary',orders:'bnOrders'};
+  const id = map[page];
+  if (id) document.getElementById(id)?.classList.add('active');
+}
+function toggleBNSheet() {
+  document.getElementById('bnSheet').classList.toggle('open');
+  document.getElementById('bnSheetOverlay').classList.toggle('open');
+}
+function closeBNSheet() {
+  document.getElementById('bnSheet')?.classList.remove('open');
+  document.getElementById('bnSheetOverlay')?.classList.remove('open');
+}
+function syncBNAuth() {
+  const loggedIn = !!USER;
+  const loginBtn = document.getElementById('bnLoginBtn');
+  const profileBtn = document.getElementById('bnProfileBtn');
+  const logoutBtn = document.getElementById('bnLogoutBtn');
+  if (loginBtn) loginBtn.style.display = loggedIn ? 'none' : 'flex';
+  if (profileBtn) profileBtn.style.display = loggedIn ? 'flex' : 'none';
+  if (logoutBtn) logoutBtn.style.display = loggedIn ? 'flex' : 'none';
+  // Show admin item if admin
+  document.querySelectorAll('#bnSheet .admin-nav-link').forEach(el => {
+    el.style.display = (loggedIn && typeof isAdmin === 'function' && isAdmin()) ? 'flex' : 'none';
+  });
+}
+
+// ============================================================
 // ★ INIT
 // ============================================================
 (function initNewFeatures() {
@@ -8426,6 +9375,10 @@ window.showQuizResult = function(score, total, subject) {
 
   // Render admin chat if admin
   if (isAdmin()) setTimeout(renderAdminLiveChat, 600);
+  // Sync bottom nav auth state
+  setTimeout(syncBNAuth, 500);
+  // Start delivery countdown checks for existing orders
+  setTimeout(startDeliveryCountdownCheck, 2000);
 })();
 </script>
 
