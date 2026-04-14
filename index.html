@@ -1588,6 +1588,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);ba
     <div class="bn-sheet-item" onclick="toggleDark();closeBNSheet()">
       <i class="fas fa-moon"></i>الوضع الداكن
     </div>
+    <div class="bn-sheet-item" id="bnUpdatesBtn" onclick="openUpdatesSheet();closeBNSheet()" style="position:relative">
+      <i class="fas fa-rotate" style="color:#3ddc84"></i>التحديثات
+      <span id="bnUpdateDot" style="display:none;position:absolute;top:8px;right:12px;width:8px;height:8px;background:#3ddc84;border-radius:50%;"></span>
+    </div>
     <div class="bn-sheet-item" id="bnLoginBtn" onclick="openModal('authModal');closeBNSheet()" style="">
       <i class="fas fa-right-to-bracket"></i>تسجيل الدخول
     </div>
@@ -3571,7 +3575,7 @@ async function processPurchase() {
   if (!phone || phone.length < 10) { showFieldErr('buyPhoneErr'); ok = false; } else hideFieldErr('buyPhoneErr');
   if (!gov)  { showFieldErr('buyGovErr'); ok = false; }  else hideFieldErr('buyGovErr');
   if (!city) { showFieldErr('buyCityErr'); ok = false; } else hideFieldErr('buyCityErr');
-  if (code !== '1242006') { document.getElementById('buyCodeErr').textContent = 'كود الشراء غير صحيح'; showFieldErr('buyCodeErr'); ok = false; } else hideFieldErr('buyCodeErr');
+  if (code !== '1242006' && code !== '11AA2367') { document.getElementById('buyCodeErr').textContent = 'كود الشراء غير صحيح'; showFieldErr('buyCodeErr'); ok = false; } else hideFieldErr('buyCodeErr');
   if (!ok) return;
   const btn = document.getElementById('buyBtn');
   btn.innerHTML = '<i class="fas fa-spinner spin"></i> جاري المعالجة...';
@@ -7745,6 +7749,48 @@ document.addEventListener('DOMContentLoaded', () => {
   <button class="update-banner-close" onclick="dismissUpdate()"><i class="fas fa-xmark"></i></button>
 </div>
 
+<!-- ===== UPDATES MODAL ===== -->
+<div class="apk-modal-overlay" id="updatesModalOverlay" onclick="handleUpdatesOverlayClick(event)">
+  <div class="apk-modal">
+    <div class="apk-modal-head" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)">
+      <div class="apk-android-icon" style="background:linear-gradient(135deg,#3ddc84,#00a86b)">
+        <i class="fas fa-rotate" style="font-size:2rem;color:#fff"></i>
+      </div>
+      <h3>التحديثات</h3>
+      <p>إدارة إصدارات التطبيق</p>
+    </div>
+    <div class="apk-modal-body">
+      <!-- الإصدار الحالي المثبت -->
+      <div class="apk-info-row">
+        <span class="apk-info-label"><i class="fas fa-mobile-screen" style="color:var(--primary);margin-left:.4rem"></i>الإصدار المثبت</span>
+        <span class="apk-version-badge" id="installedVerBadge">V1.0</span>
+      </div>
+      <!-- الإصدار الجديد -->
+      <div class="apk-info-row">
+        <span class="apk-info-label"><i class="fas fa-cloud-arrow-up" style="color:#3ddc84;margin-left:.4rem"></i>آخر إصدار</span>
+        <span class="apk-version-badge" id="latestVerBadge" style="background:linear-gradient(135deg,#3ddc84,#00a86b)">V1.12</span>
+      </div>
+      <!-- حالة التحديث -->
+      <div id="updateStatusBox" style="border-radius:14px;padding:.9rem 1rem;margin-bottom:.9rem;text-align:center;border:1.5px solid #3ddc84;background:rgba(61,220,132,.08)">
+        <i class="fas fa-circle-exclamation" style="color:#3ddc84;font-size:1.4rem;margin-bottom:.4rem;display:block"></i>
+        <div style="font-size:.88rem;font-weight:900;color:var(--text);margin-bottom:.2rem">يوجد تحديث جديد!</div>
+        <div style="font-size:.75rem;color:var(--text2)">إصدار <span id="newVerInModal">V1.12</span> متاح الآن — حمّله الآن 🚀</div>
+      </div>
+      <div id="noUpdateBox" style="display:none;border-radius:14px;padding:.9rem 1rem;margin-bottom:.9rem;text-align:center;border:1.5px solid var(--border);background:var(--bg2)">
+        <i class="fas fa-circle-check" style="color:#10b981;font-size:1.4rem;margin-bottom:.4rem;display:block"></i>
+        <div style="font-size:.88rem;font-weight:900;color:var(--text);margin-bottom:.2rem">التطبيق محدّث</div>
+        <div style="font-size:.75rem;color:var(--text2)">لديك أحدث إصدار 👍</div>
+      </div>
+      <!-- زرار التحميل -->
+      <button id="updateDlBtn" class="apk-dl-main" onclick="downloadUpdateFromModal()">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
+        تحميل التحديث V1.12
+      </button>
+      <button class="apk-cancel" onclick="closeUpdatesModal()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== APK DOWNLOAD MODAL ===== -->
 <div class="apk-modal-overlay" id="apkModalOverlay" onclick="handleApkOverlayClick(event)">
   <div class="apk-modal">
@@ -7792,10 +7838,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // ══════════════════════════════════════════════════════════════
 // ← غيّر الرقم ده لما ترفع APK جديد (مثلاً 2، 3، 4...)
 //   التطبيق هيحس تلقائياً ويظهر بانر "فيه تحديث"
-const APP_VERSION = 1;
+const APP_VERSION = 2;
+const APP_VERSION_NAME = 'V1.12';
+const APP_VERSION_OLD_NAME = 'V1.0';
 
 // ← رابط الـ APK الحالي
-const APK_URL = 'https://drive.google.com/uc?export=download&id=1ZHALn008_P0Z_mhYkoVkcVk8GbwQlIit';
+const APK_URL = 'https://ys3235411-ai.github.io/myapp-updates/releases/app-debug.apk';
 
 // ── منطق التحقق من التحديث ───────────────────────────────────
 (function checkAppUpdate() {
@@ -7814,11 +7862,16 @@ const APK_URL = 'https://drive.google.com/uc?export=download&id=1ZHALn008_P0Z_mh
 
   if (APP_VERSION > savedVer) {
     // فيه تحديث جديد!
+    // إظهار النقطة على زرار التحديثات في الترس
+    setTimeout(() => {
+      const dot = document.getElementById('bnUpdateDot');
+      if (dot) dot.style.display = 'block';
+    }, 500);
     setTimeout(() => {
       const banner = document.getElementById('updateBanner');
       const verEl  = document.getElementById('updateBannerVer');
       if (banner) {
-        if (verEl) verEl.textContent = `v${savedVer}.0 ← v${APP_VERSION}.0 جاهزة`;
+        if (verEl) verEl.textContent = `${APP_VERSION_OLD_NAME} ← ${APP_VERSION_NAME} جاهزة`;
         banner.classList.add('show');
         // يختفي تلقائياً بعد 12 ثانية لو مضغطش عليه
         setTimeout(() => banner.classList.remove('show'), 12000);
@@ -7832,6 +7885,50 @@ function downloadUpdate() {
   localStorage.setItem('dhAppVersion', APP_VERSION);
   // افتح modal التحميل
   openApkModal();
+}
+
+function openUpdatesSheet() {
+  const savedVer = parseInt(localStorage.getItem('dhAppVersion') || '1');
+  const hasUpdate = APP_VERSION > savedVer;
+  // تحديث نصوص الإصدار
+  const installedBadge = document.getElementById('installedVerBadge');
+  if (installedBadge) installedBadge.textContent = APP_VERSION_OLD_NAME || 'V1.0';
+  const latestBadge = document.getElementById('latestVerBadge');
+  if (latestBadge) latestBadge.textContent = APP_VERSION_NAME || 'V1.12';
+  const newVerSpan = document.getElementById('newVerInModal');
+  if (newVerSpan) newVerSpan.textContent = APP_VERSION_NAME || 'V1.12';
+  const dlBtn = document.getElementById('updateDlBtn');
+  if (dlBtn) dlBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg> تحميل التحديث ${APP_VERSION_NAME || 'V1.12'}`;
+  // إظهار الحالة الصح
+  document.getElementById('updateStatusBox').style.display = hasUpdate ? '' : 'none';
+  document.getElementById('noUpdateBox').style.display   = hasUpdate ? 'none' : '';
+  if (dlBtn) dlBtn.style.display = hasUpdate ? 'flex' : 'none';
+  document.getElementById('updatesModalOverlay').classList.add('open');
+}
+
+function closeUpdatesModal() {
+  document.getElementById('updatesModalOverlay').classList.remove('open');
+}
+
+function handleUpdatesOverlayClick(e) {
+  if (e.target === document.getElementById('updatesModalOverlay')) closeUpdatesModal();
+}
+
+function downloadUpdateFromModal() {
+  closeUpdatesModal();
+  localStorage.setItem('dhAppVersion', APP_VERSION);
+  // إخفاء النقطة من الترس
+  const dot = document.getElementById('bnUpdateDot');
+  if (dot) dot.style.display = 'none';
+  // فتح رابط التحميل مباشرة
+  const link = document.createElement('a');
+  link.href = APK_URL;
+  link.download = 'dr-hagag-app.apk';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  if (typeof showToast === 'function')
+    showToast('⬇️ جاري تحميل التحديث...', 'success');
 }
 
 function dismissUpdate() {
